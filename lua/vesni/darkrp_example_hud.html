@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vesni - DarkRP HUD example</title>
+		<style>
+			html {overflow-y: hidden;overflow-x: hidden;}
+			body {
+				background: none;
+				color:white;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+				font-size: 1.5em;
+				text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+			}
+		</style>
+	</head>
+	<!-- Welcome to the Vesni Web-side example demonstration -->
+	<!-- This example is only a HUD and doesn't feature any other modes -->
+	<body ondragstart="return false" onmousedown="return false">
+		<div id="hud" style="position: fixed;bottom: 0;">
+			<h1>
+				<span id="job"></span>
+				<span id="name"></span>
+				<span id="talking"></span>
+			</h1>
+			<h1>
+				<span id="health"></span>
+				<span id="armor"></span>
+				<span id="hunger"></span>
+				<span id="thirst"></span>
+				<span id="money"></span>
+			</h1>
+		</div>
+	</body>
+	<script>
+		vesni.validate(); // Tell the Lua side we're valid (Vesni webpage).
+		const hud = document.getElementById("hud")
+		const name = document.getElementById("name");
+		const job = document.getElementById("job");
+		const health = document.getElementById("health");
+		const armor = document.getElementById("armor");
+		const hunger = document.getElementById("hunger");
+		const thirst = document.getElementById("thirst");
+		const money = document.getElementById("money");
+		const talking = document.getElementById("talking");
+		function update(type, ...args) { // This function is called automatically by the Lua side to keep the webpage updated.
+			switch (type) {
+				case 'DrawHUD':
+					hud.style.display = args[0] && 'block' || 'none';
+					break;
+				case 'Name':
+					name.innerText = args[0];
+					break;
+				case 'Job':
+					job.innerText = args[0].name;
+					break;
+				case 'Health':
+					health.innerText = '❤️' + args[0];
+					break;
+				case 'Armor':
+					armor.innerText = '🛡️' + args[0];
+					break;
+				case 'Hunger':
+					hunger.innerText = '🍔' + args[0];
+					break;
+				case 'Thirst':
+					thirst.innerText = '💧' + args[0];
+					break;
+				case 'Money':
+					money.innerText = '💲' + args[0];
+					break;
+				case 'IsTalking':
+					money.innerText = args[0] + '📢' || '';
+					break;
+				default:
+					console.error(`Unsupported type ${type}`);
+			}
+		}
+		vesni.ready(); // Tell the Lua side we're ready to receive updates.
+	</script>
+</html>

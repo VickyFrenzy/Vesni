@@ -1,0 +1,36 @@
+{
+	"title"		:	"Vesni Content",
+	"type"		:	"ServerContent",
+	"ignore"	:
+	[
+		"*.svn*",
+		"*.git*",
+		"*.psd",
+		"*.psb",
+		"*.xcf",
+		"*.svg",
+		"*.vcproj",
+		"*.md",
+		"*.bat",
+		"*.cmd",
+		"*.sh",
+		"*.py*",
+		"*.vmf",
+		"*.vmx",
+		"*.prt",
+		"*.pts",
+		"*.log",
+		"*.db",
+		"*.ini",
+		"*.json",
+		"*.yml",
+		"*.gma",
+		"*.lua*",
+		".docker*",
+		".vscode*",
+		"CODEOWNERS",
+		"LICENSE",
+		".editorconfig",
+		".addon.jpg"
+	]
+}
