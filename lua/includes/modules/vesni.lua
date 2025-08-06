@@ -47,7 +47,7 @@ local function UI()
 	hook.Run("VesniUI_Created", VesniUI, getPly)
 end
 
-local function hudPaint()
+function hudPaint()
 	if not pLocalPlayer then
 		local pLocal = LocalPlayer()
 		if not IsValid(pLocal) then return end
