@@ -144,7 +144,7 @@ function HTML:OnFinishLoadingDocument(sURL)
 	if self.bValid then return end
 	timer.Simple(6, function()
 		if not IsValid(self) then return end
-		self:QueueJavascript("location.reload();")
+		self:RunJavascript("location.reload();")
 	end)
 end
 
