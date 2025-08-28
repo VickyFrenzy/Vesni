@@ -32,12 +32,12 @@ function HTML:Init()
 	local mParent = self:GetParent()
 	self:AddFunction("vesni", "validate", function()
 		self.bValid = true
-		--debug_print(SysTime(), "DocumentValidated")
+		debug_print("DocumentValidated", SysTime())
 	end)
 	self:AddFunction("vesni", "ready", function()
 		self.bReady = true
 		self:Update("Binds", generateBindsTable())
-		--debug_print(SysTime(), "DocumentReady")
+		debug_print("DocumentReady", SysTime())
 	end)
 	self:AddFunction("vesni", "action", function(sType, ...)
 		debug_print("Action", sType, ...)
@@ -130,17 +130,17 @@ function HTML:AddValueToUpdate(sName, fValue, ...)
 end
 
 function HTML:OnBeginLoadingDocument(sURL)
-	--debug_print(SysTime(), "OnBeginLoadingDocument", sURL)
+	debug_print("OnBeginLoadingDocument", SysTime(), sURL)
 end
 
 function HTML:OnDocumentReady(sURL)
-	--debug_print(SysTime(), "OnDocumentReady", sURL)
+	debug_print("OnDocumentReady", SysTime(), sURL)
 	if not self.bDebug then return end
 	self:Eruda()
 end
 
 function HTML:OnFinishLoadingDocument(sURL)
-	--debug_print(SysTime(), "OnFinishLoadingDocument", sURL)
+	debug_print("OnFinishLoadingDocument", SysTime(), sURL)
 	if self.bValid then return end
 	timer.Simple(6, function()
 		if not IsValid(self) then return end
@@ -149,14 +149,15 @@ function HTML:OnFinishLoadingDocument(sURL)
 end
 
 function HTML:OnChildViewCreated(sSourceURL, sTargetURL, bIsPopup)
-	--debug_print(SysTime(), "OnChildViewCreated", sSourceURL, sTargetURL, bIsPopup)
+	debug_print("OnChildViewCreated", SysTime(), sSourceURL, sTargetURL, bIsPopup)
 end
 
 function HTML:OnChangeTitle(sTitle)
+	debug_print("OnChangeTitle", SysTime(), sTitle)
 end
 
 function HTML:OnChangeTargetURL(sURL)
-	--debug_print(SysTime(), "OnChangeTargetURL", sURL)
+	debug_print("OnChangeTargetURL", SysTime(), sURL)
 end
 
 function HTML:Eruda()
