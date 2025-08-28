@@ -49,6 +49,9 @@ function HTML:Init()
 			gui.OpenURL(...)
 		end
 	end)
+	self:AddFunction("vesni", "runhook", function(sName, ...)
+		hook.Run(sName, ...)
+	end)
 	self:AddFunction("vesni", "concommand", function(sCommand, ...)
 		RunConsoleCommand(sCommand, ...)
 	end)
@@ -131,16 +134,19 @@ end
 
 function HTML:OnBeginLoadingDocument(sURL)
 	debug_print("OnBeginLoadingDocument", SysTime(), sURL)
+	hook.Run("VesniUI_OnBeginLoadingDocument", self, sURL)
 end
 
 function HTML:OnDocumentReady(sURL)
 	debug_print("OnDocumentReady", SysTime(), sURL)
+	hook.Run("VesniUI_OnDocumentReady", self, sURL)
 	if not self.bDebug then return end
 	self:Eruda()
 end
 
 function HTML:OnFinishLoadingDocument(sURL)
 	debug_print("OnFinishLoadingDocument", SysTime(), sURL)
+	hook.Run("VesniUI_OnFinishLoadingDocument", self, sURL)
 	if self.bValid then return end
 	timer.Simple(6, function()
 		if not IsValid(self) then return end
@@ -150,14 +156,17 @@ end
 
 function HTML:OnChildViewCreated(sSourceURL, sTargetURL, bIsPopup)
 	debug_print("OnChildViewCreated", SysTime(), sSourceURL, sTargetURL, bIsPopup)
+	hook.Run("VesniUI_OnChildViewCreated", self, sSourceURL, sTargetURL, bIsPopup)
 end
 
 function HTML:OnChangeTitle(sTitle)
 	debug_print("OnChangeTitle", SysTime(), sTitle)
+	hook.Run("VesniUI_OnChangeTitle", self, sTitle)
 end
 
 function HTML:OnChangeTargetURL(sURL)
 	debug_print("OnChangeTargetURL", SysTime(), sURL)
+	hook.Run("VesniUI_OnChangeTargetURL", self, sURL)
 end
 
 function HTML:Eruda()
