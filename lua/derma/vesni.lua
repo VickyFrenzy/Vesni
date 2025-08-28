@@ -170,7 +170,7 @@ function HTML:OnChangeTargetURL(sURL)
 end
 
 function HTML:Eruda()
-	return self:QueueJavascript[[javascript:(function () { var script = document.createElement('script'); script.src="https://cdn.jsdelivr.net/npm/eruda"; document.body.append(script); script.onload = function () { eruda.init(); } })();]]
+	return self:QueueJavascript[[javascript:(function () { var script = document.createElement('script'); script.src="https://cdn.jsdelivr.net/npm/eruda@v3.4.0"; document.body.append(script); script.onload = function () { eruda.init(); } })();]]
 end
 
 function HTML:ConsoleMessage(sMsg, sFile, line)
