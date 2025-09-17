@@ -38,6 +38,9 @@ function HTML:Init()
 		self.bReady = true
 		self:Update("Binds", generateBindsTable())
 		debug_print("DocumentReady", SysTime())
+		if mParent.iMode then
+			self:Update("mode", mParent.iMode)
+		end
 	end)
 	self:AddFunction("vesni", "action", function(sType, ...)
 		debug_print("Action", sType, ...)
@@ -109,6 +112,12 @@ function HTML:UpdateValues()
 	end
 end
 
+function HTML:ClearValues()
+	for _, tWatch in ipairs(self.tWatch) do
+		tWatch.last = nil
+	end
+end
+
 function HTML:Think()
 	if self:IsLoading() then return end
 
@@ -134,6 +143,8 @@ end
 
 function HTML:OnBeginLoadingDocument(sURL)
 	debug_print("OnBeginLoadingDocument", SysTime(), sURL)
+	self.bValid, self.bReady = false, false
+	self:ClearValues()
 	hook.Run("VesniUI_OnBeginLoadingDocument", self, sURL)
 end
 
